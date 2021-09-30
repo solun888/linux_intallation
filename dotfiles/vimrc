@@ -1,0 +1,84 @@
+syntax on
+
+set shiftwidth=4
+
+set showcmd
+
+set smartindent
+
+set number relativenumber "Setting line number"
+
+set nu
+
+set autoindent
+
+set ruler
+
+set noswapfile
+
+set hls is "Marking sure search highlights words as we type them
+set ic 
+
+set incsearch
+
+set colorcolumn=80
+
+set laststatus=2 "Setting the size for the command area, and airline status bar
+set cmdheight=3
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'morhetz/gruvbox'
+
+Plug 'junegunn/goyo.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-signify'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'ap/vim-css-color'
+Plug 'junegunn/limelight.vim'
+
+call plug#end()
+
+colorscheme gruvbox
+set background=dark
+
+"Key re-maps
+
+map <C-n>	:Lex!<CR>
+map <C-g>	:Goyo<CR>
+map <C-u>	:source ~/.vimrc<CR>
+
+
+" set to 1, nvim will open the preview window after entering the markdown
+" buffer
+" " default: 0
+ let g:mkdp_auto_start = 0
+"
+" " set to 1, the nvim will auto close current preview window when change
+" " from markdown buffer to another buffer
+" " default: 1
+ let g:mkdp_auto_close = 1
+" set to 1, preview server available to others in your network
+" " by default, the server listens on localhost (127.0.0.1)
+" " default: 0
+ let g:mkdp_open_to_the_world = 0
+ " specify browser to open preview page
+ " " default: ''
+ let g:mkdp_browser = 'brave'
+ " recognized filetypes
+ " " these filetypes will have MarkdownPreview... commands
+ let g:mkdp_filetypes = ['markdown']
+
+" normal/insert
+" <Plug>MarkdownPreview
+" <Plug>MarkdownPreviewStop
+" <Plug>MarkdownPreviewToggle
+""
+"" " example
+" nmap <C-s> <Plug>MarkdownPreview
+" nmap <M-s> <Plug>MarkdownPreviewStop
+" nmap <C-p> <Plug>MarkdownPreviewToggle
+

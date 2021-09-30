@@ -1,0 +1,15 @@
+include "/home/solun/.cache/wal/colors.Xresources"
+
+Xft.dpi:	210 
+
+*font:		monospace:size=12
+*.font:		monospace:size=12
+
+*alpha:		0.8
+*.alpha:	0.8
+
+#*.baralpha:	150	
+#*baralpha:	150
+
+
+
