@@ -46,7 +46,7 @@ systemctl list-unit-files --state=enabled
 
 #### Install library for making DWM
 
-`sudo pacman -S libx11 libxiberama libxft webkt2gtk`
+`sudo pacman -S libx11 libxinerama libxft webkit2gtk`
 
 #### Clone down Suckless DWM
 
