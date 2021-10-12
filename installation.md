@@ -4,7 +4,7 @@
 1. Install base-devel Git 
 1. [Install Xorg](#install-xorg) 
 1. Install Suckless DWM
-
+1. [Wireless Network Setup](#wireless-network-with-interface)
 ---
 
 ### Archfi installation script 
@@ -24,6 +24,13 @@
 
 ---
 
+### To list enabled services
+
+```
+systemctl list-unit-files --state=enabled
+```
+
+---
 ### Install Xorg
 
 
@@ -55,8 +62,91 @@ Make a directory for the suckless DWM and get into it.
 
 `git clone https://git.suckless.org/dmenu`
 
+---
+### Getting Hardware Information 
+#### To show all hardware infotmations
+```
+lshw 
+```
+#### To show CPU informations
+```
+lshw -C cpu
+```
+#### To show network hardware informations
+```
+lshw -C network
+```
+---
 
- 
+### Command "Dmidecode" - System informations based on SMBIOS
+```
+sudo dmideocde
+```
+#### To show memory size with dmidecode and grep
+```
+sudo dmidecode -t memory | grep -i size
+```
+---
+### Command "lspci"
+#### Using lspci with grep -i (ignore-case)
+```
+lspci | grep -i wireless
+```
+---
+### To show Disk information
+```
+lshw -C disk -short
+```
+```
+lsblk
+```
+```
+fdisk -l 
+```
+---
+### Network Setup
+#### To show network connects
+```
+ip link
+```
+```
+iw list
+```
+
+
+#### Setup wireless network with interface
+```
+nmtui
+```
+---
+#### Setup wireless network with command "wpa_suppplicant"
+#### Create wpa_supplicant config file
+##### 1. Get the logical name of wireless network device
+
+```
+lshw -C network
+```
+#####    or 	
+
+```
+ip link
+```
+
+##### 2. Create /etc/wpa_supplicant/wpa_supplicant-$logicalnameofwihi.conf
+```
+touch /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+```
+#### 3. Adding the following line into the .conf file
+```
+ctrl_interface=/run/wpa_supplicant
+update_config=1
+```
+
+
+
+
+
+
 
 
 
