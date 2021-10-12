@@ -4,7 +4,7 @@
 1. Install base-devel Git 
 1. [Install Xorg](#install-xorg) 
 1. Install Suckless DWM
-1. [Wireless Network Setup](#wireless-network-with-interface)
+1. [Wireless Network Setup](#wireless-network-setup)
 ---
 
 ### Archfi installation script 
@@ -104,7 +104,7 @@ lsblk
 fdisk -l 
 ```
 ---
-### Network Setup
+### Wireless Network Setup
 #### To show network connects
 ```
 ip link
