@@ -5,6 +5,7 @@
 1. [Install Xorg](#install-xorg) 
 1. Install Suckless DWM
 1. [Wireless Network Setup](#wireless-network-setup)
+1. [Install MPV with yt-dlp](#install-mpv-with-yt-dlp) 
 ---
 
 ### Archfi installation script 
@@ -142,11 +143,34 @@ ctrl_interface=/run/wpa_supplicant
 update_config=1
 ```
 
+---
 
 
+### Install MPV with yt-dlp
+
+#### To using MPV for playing youtube without slow buffering, youtube-dl has to be replace with yt-dlp.
+
+```
+https://github.com/yt-dlp/yt-dlp
+```
+##### or using yay to install yt-dlp for archlinux 
+```
+yay -S yt-dlp
+
+```
+#### Then edit mpv.conf, adding the following line.
+
+```
+script-opts=ytdl_hook-ytdl_path=${PATH-TO-YT-DLP}
+
+```
+##### or install yt-dlp-drop-in for Archlinux
 
 
-
+#### Reference website
+```
+https://www.funkyspacemonkey.com/replace-youtube-dl-with-yt-dlp-how-to-make-mpv-work-with-yt-dlp
+```
 
 
 
