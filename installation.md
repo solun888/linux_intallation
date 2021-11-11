@@ -1,11 +1,12 @@
 # Archlinux installation 
 
 1. Using archlinux installation script)"[Archfi](https://github.com/MatMoul/archfi)"
-1. Install base-devel Git 
-1. [Install Xorg](#install-xorg) 
-1. Install Suckless DWM
-1. [Wireless Network Setup](#wireless-network-setup)
-1. [Install MPV with yt-dlp](#install-mpv-with-yt-dlp) 
+2. [Manually installation](#manually-installation)
+3. Install base-devel Git 
+4. [Install Xorg](#install-xorg) 
+5. Install Suckless DWM
+6. [Wireless Network Setup](#wireless-network-setup)
+7. [Install MPV with yt-dlp](#install-mpv-with-yt-dlp) 
 ---
 
 ### Archfi installation script 
@@ -14,9 +15,112 @@
 
 `sh archfi`
 
-
-
 ---
+
+### Manually installation 
+
+#### 1. Set the console keyboard layout
+
+List available layouts
+
+`ls /usr/share/kbd/keymaps/**/*.map.gz`
+
+`loadkeys us.map.gz`  
+
+#### 2. Verify the boot mode
+
+`ls /sys/firmware/efi/efivars` 
+
+if the command shows the directory without error, then the system is booted in UEFI mode.
+
+#### 3. Network
+
+#### 3.1 ip link
+
+#### 3.2 iwctl
+
+`iwctl` To get into interactive prompt
+
+[iwd]# `help` list all available commands
+
+[iwd]# `device list` list all Wi-Fi devices
+
+[iwd]# `station *device* scan`  To scan for network
+
+[iwd]# `station *device* get-networks` list all available network
+
+[iwd]# `station *device* connect SSID` to connect to network
+
+#### 4. Update System clock
+
+`timedatectl set-ntp true` 
+
+`timedatectl status` check the time status
+
+#### 5. Partition the disk
+
+#### 5.1 fdisk 
+
+`fdisk -l` list attached drive
+
+`lsblk` list device with mount point 
+
+`fdisk /dev/the_disk_to_be_partitioned` modify partition tables
+
+| fdisk command | function |
+| :---: | :---: |
+| m | manual |
+| g | create a new GPT partition table |
+| n | add a new partition |
+| t | change a partition type |
+
+Example layouts
+
+| Mount point | Partition type | Suggested size |
+| :---: | :---: | :---: |
+| /mnt/boot or /mnt/efi | EFI system partition | At least 260MiB |
+| [SWAP] | Linux swap | Square root to total memory |
+| /mnt | Linux filesystem | Remainder of the device |
+
+#### 5.2 Format partition 
+
+`mkfs.fat -F 32 /dev/*efi_system_partition`
+
+`mkswap /dev/swap_partition` 
+
+`mkfs.btrfs /dev/root_partition`
+
+#### 5.3 Creating Subvolumes and Mounting
+
+```
+mount /dev/*root_partition* /mnt
+
+btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+btrfs su cr /mnt/@var
+btrfs su cr /mnt/@tmp
+btrfs su cr /mnt/@snapshots
+
+umount /mnt
+
+```
+Mounting 
+
+```
+mount -o noatime,compress=lzo,space_cache=v2,subvol=@ /dev/*root_partition* /mnt
+mkdir -p /mnt/{boot/efi,home,var,tmp,.snapshots}
+
+```
+Home 
+
+`mount -o noatime,compress=lzo,space_cache=v2,subvol=@home /dev/sda3 /mnt/home`
+
+var
+
+`mount -o subvol=@var /dev/sda3 /mnt/var`
+
+
+
 
 ### Install base-devel and Git 
 `sudo pacman -S base-devel git vim`
