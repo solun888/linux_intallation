@@ -167,6 +167,10 @@ Make a directory for the suckless DWM and get into it.
 
 `git clone https://git.suckless.org/dmenu`
 
+
+add static unsigned int border_width = 0; then make install will get undefined reference to symbol 'XRenderFindVisualFormat' ...
+You could try adding -lXrender to the LIBS definition in config.mk
+
 ---
 ### Getting Hardware Information 
 #### To show all hardware infotmations
