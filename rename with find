@@ -7,3 +7,5 @@ find /your/target/path/ -type d -execdir rename 's/special/regular/' '{}' \+
 To rename both files and directories:
 
 find /your/target/path/ -execdir rename 's/special/regular/' '{}' \+
+
+find /your/target/path/ -type d -empty -delete 
